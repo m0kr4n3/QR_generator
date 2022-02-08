@@ -17,8 +17,8 @@ QR = qrcode.QRCode(
 
 
 def remove_qr_codes():
-    for f in os.listdir("static/qr_codes"):
-        os.remove(os.path.join("static/qr_codes", f))
+    for f in os.listdir("app/static/qr_codes"):
+        os.remove(os.path.join("app/static/qr_codes", f))
 
 
 @app.route("/", methods=["GET"])
@@ -38,10 +38,10 @@ def generate_qr():
             QR.add_data(text)
             img = QR.make_image(fill_color="black", back_color="white")
             qr_path = f"static/qr_codes/{uuid.uuid4().hex}.png"
-            img.save(qr_path)
+            img.save(f"app/{qr_path}")
 
             result = "Here's your QR code"
-        except:
+        except Exception as e:
             print(e)
             result = "something is going wrong"
             qr_path = None
