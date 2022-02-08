@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href={{ url_for( 'static',filename='styles/main.css' ) }}>
+    <title>Generate your QR code</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Generate QR code</h1>
+        <p>Enter the text you want in the QR code :</p>
+        <form action="generate_qr" method="post" novalidate>
+            <input type="text" id="text" name="text" placeholder="Enter your text">
+            <button type="submit">Generate QR code</button>
+        </form>
+        <h3>{{ result }}</h3>
+        {% if qr_path is not none %}
+        <img src="{{ qr_path }}"> {%endif%}
+
+    </div>
+</body>
+
+</html>
