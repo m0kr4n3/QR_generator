@@ -8,12 +8,6 @@ app = Flask(__name__)
 
 scheduler = APScheduler()
 
-QR = qrcode.QRCode(
-    version=1,
-    error_correction=qrcode.constants.ERROR_CORRECT_L,
-    box_size=10,
-    border=4,
-)
 
 
 def remove_qr_codes():
@@ -35,6 +29,12 @@ def generate_qr():
         text = request.form.get("text")
 
         try:
+            QR = qrcode.QRCode(
+                version=1,
+                error_correction=qrcode.constants.ERROR_CORRECT_L,
+                box_size=10,
+                border=4,
+            )
             QR.add_data(text)
             img = QR.make_image(fill_color="black", back_color="white")
             qr_path = f"static/qr_codes/{uuid.uuid4().hex}.png"
@@ -56,4 +56,4 @@ if __name__ == "__main__":
         id="Delete qr codes", func=remove_qr_codes, trigger="interval", seconds=5
     )
     scheduler.start()
-    app.run()
+    app.run(debug=True)
