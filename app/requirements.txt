@@ -3,7 +3,6 @@ asgiref==3.5.0
 certifi==2021.10.8
 charset-normalizer==2.0.11
 click==8.0.3
-Django==4.0.2
 docopt==0.6.2
 Flask==2.0.1
 Flask-APScheduler==1.12.3
