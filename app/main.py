@@ -12,7 +12,8 @@ scheduler = APScheduler()
 
 def remove_qr_codes():
     for f in os.listdir("static/qr_codes"):
-        os.remove(os.path.join("static/qr_codes", f))
+        if f.endswith(".png"):
+            os.remove(os.path.join("static/qr_codes", f))
 
 
 @app.route("/", methods=["GET"])
@@ -42,13 +43,12 @@ def generate_qr():
 
             result = "Here's your QR code"
         except Exception as e:
-            print(e);input()
+            print(e)
             result = "something is going wrong"
             qr_path = None
-        finally:
-            return render_template(
-                "./generate_qr.html", result=result, qr_path=qr_path
-            )
+        return render_template(
+            "./generate_qr.html", result=result, qr_path=qr_path
+        )
 
 
 if __name__ == "__main__":
